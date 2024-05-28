@@ -1,0 +1,77 @@
+---
+const projects = [
+  {
+    title: 'International Psychology & Environmental Congress',
+    description: 'Web design and development for the annual event.',
+    image: '/work-1.png',
+    link: 'https://congresopga.unicoc.edu.co/',
+    tags: ['WordPress']
+  },
+  {
+    title: 'Frontend Mentor Landing Page',
+    description: 'Landing page for a frontend mentor challenge.',
+    image: '/work-2.png',
+    link: 'https://loopstudios-landing-page-pearl-rho.vercel.app/',
+    tags: ['Astro', 'TailwindCSS']
+  },
+  {
+    title: 'Frontend Mentor Landing Page',
+    description: 'Landing page for a frontend mentor challenge.',
+    image: '/work-4.png',
+    link: 'https://easybank-landing-page-one-lemon.vercel.app/',
+    tags: ['Astro', 'TailwindCSS']
+  }
+]
+---
+
+<div class="projects-wrapper">
+  <div class="projects || flex gap-6 min-w-fit">
+    {
+      projects.map((project) => (
+        <div>
+          <div class="border rounded-lg shadow bg-primary-950/50 border-gray-700">
+            <img class="rounded-t-lg min-w-[700px]" src={project.image} alt="" />
+            <div class="p-5">
+              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{project.title}</h5>
+              <p class="mb-3 font-normal text-base text-gray-700 dark:text-gray-400">{project.description}</p>
+              <a href={project.link} class="transition-colors duration-500 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-primary-50 bg-primary-600 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 ">
+                Visit Site
+                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  import gsap from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  gsap.registerPlugin(ScrollTrigger)
+
+  const projects = document.querySelector('.projects') as HTMLElement
+  const padding = 450
+
+  const getAmountToScroll = () => {
+    let projectsWidth = projects.offsetWidth + padding
+    return -(projectsWidth - window.innerWidth)
+  }
+
+  const projectsTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '.projects-wrapper',
+      scrub: 2,
+      pin: true,
+      start: 'top 10%',
+      end: () => `+=` + getAmountToScroll() * -1
+    }
+  })
+
+  projectsTl.to(projects, {
+    x: getAmountToScroll
+  })
+</script>

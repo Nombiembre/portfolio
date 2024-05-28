@@ -1,0 +1,19 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Badge from '@/components/Badge.astro'
+import Projects from '@/components/Projects.astro'
+---
+
+<Layout title="Home.">
+  <main class="pt-32">
+    <section class="container">
+      <h1 class="flex items-center gap-x-2 flex-wrap mb-3">Hi im <span class="text-purple-400">Nombiembre</span><Badge>Available for hire</Badge></h1>
+      <h2 class="text-xl lg:text-2xl text-primary-50">Web Developer with a passion for creating beautiful and functional websites. I love building things that are visually appealing and user-friendly.</h2>
+    </section>
+
+    <section class="container || pt-28">
+      <h2 class="text-3xl font-bold mb-3">Latest Projects</h2>
+      <Projects />
+    </section>
+  </main>
+</Layout>

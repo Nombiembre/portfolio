@@ -1,0 +1,71 @@
+---
+import Head from '@/components/Head.astro'
+import Header from '@/components/Header.astro'
+
+interface Props {
+  title: string
+}
+
+const { title } = Astro.props
+---
+
+<!doctype html>
+<html lang="en">
+  <Head title={title} />
+  <body class="min-h-screen bg-zinc-900">
+    <div class="pointer-events-none absolute bottom-0 right-[20%] top-[-10%] size-[1500px] rounded-full bg-[radial-gradient(circle_farthest-side,rgba(255,0,182,.15),rgba(255,255,255,0))]"></div>
+    <Header />
+    <slot />
+
+    <div class="cursor || size-10 border-2 border-purple-400 rounded-full absolute z-50 pointer-events-none opacity-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+    <script>
+      import gsap from 'gsap'
+      import { ScrollTrigger } from 'gsap/ScrollTrigger'
+      gsap.registerPlugin(ScrollTrigger)
+
+      // READING PROGRESS SCROLL ANIMATION
+
+      const progress = document.querySelector('.reading-progress')
+      gsap.to(progress, {
+        width: '100%',
+        scrollTrigger: {
+          trigger: 'main',
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: 1
+        }
+      })
+
+      // CUSTOM CURSOR
+      const cursor = document.querySelector('.cursor')
+
+      window.addEventListener('mousemove', (e) => {
+        const x = e.clientX
+        const y = e.clientY
+        const cursorTl = gsap.timeline({
+          defaults: {
+            duration: 0.3,
+            transformOrigin: 'center center'
+          }
+        })
+
+        cursorTl.to(cursor, {
+          top: y,
+          left: x,
+          opacity: 1
+        })
+      })
+
+      window.addEventListener('scroll', (e) => {
+        const y = window.scrollY
+
+        gsap.to(cursor, {
+          y: y,
+          duration: 0.3,
+          opacity: 1,
+          transformOrigin: 'center center'
+        })
+      })
+    </script>
+  </body>
+</html>

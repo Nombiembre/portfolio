@@ -1,0 +1,29 @@
+.container {
+  --_maxwidth: 1150px;
+  --_padding: 2rem;
+  width: min(var(--_maxwidth), 100% - (var(--_padding) * 2));
+
+  margin-inline: auto;
+}
+
+html {
+  color-scheme: light dark;
+  overflow-x: hidden;
+}
+
+h1 {
+  @apply text-5xl font-bold;
+}
+
+body {
+  font-family: 'Onest', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Raleway', sans-serif;
+}
