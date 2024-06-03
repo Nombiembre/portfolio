@@ -1,13 +1,26 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import Badge from '@/components/Badge.astro'
 import Projects from '@/components/Projects.astro'
 ---
 
 <Layout title="Home.">
   <main class="pt-32">
     <section class="container">
-      <h1 class="flex items-center gap-x-2 flex-wrap mb-3">Hi im <span class="text-purple-400">Nombiembre</span><Badge>Available for hire</Badge></h1>
+      <h1 class="flex items-center gap-x-2 flex-wrap mb-3">
+        Hi im <span class="name || text-purple-400 flex">
+          <div class="hidden ">N</div>
+          <div class="hidden ">o</div>
+          <div class="hidden ">m</div>
+          <div class="hidden ">b</div>
+          <div class="hidden ">i</div>
+          <div class="hidden ">e</div>
+          <div class="hidden ">m</div>
+          <div class="hidden ">b</div>
+          <div class="hidden ">r</div>
+          <div class="hidden ">e</div>
+          <span id="stick" class="inline-block">|</span></span
+        >
+      </h1>
       <h2 class="text-xl lg:text-2xl text-primary-50">Web Developer with a passion for creating beautiful and functional websites. I love building things that are visually appealing and user-friendly.</h2>
     </section>
 
@@ -17,3 +30,30 @@ import Projects from '@/components/Projects.astro'
     </section>
   </main>
 </Layout>
+
+<script>
+  import gsap from 'gsap'
+  const stick = document.getElementById('stick') as HTMLElement
+  const letters = document.querySelectorAll('.name div') as NodeList
+
+  setTimeout(() => {
+    letters.forEach((letter, index) => {
+      gsap
+        .timeline({})
+        .to(letter, {
+          duration: 0.5,
+          display: 'inline-block',
+          opacity: 1,
+          delay: index * 0.15,
+          ease: 'power2.inOut',
+        })
+        .to(stick, {
+          repeat: -1,
+          yoyo: true,
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power2.inOut'
+        })
+    })
+  }, 600)
+</script>
