@@ -2,40 +2,79 @@
 import TwBadge from '@/components/badges/twBadge.astro'
 import AstroBadge from '@/components/badges/astroBadge.astro'
 import WpBadge from '@/components/badges/wpBadge.astro'
+import TechTags from './projects/TechTags.astro'
 
 const projects = [
   {
-    title: "Atlasmooth portfolio page",
-    description: "Real work done for a client in fiverr.",
-    image: "work-5.png",
-    link: "https://andres-fiverr.vercel.app/",
-    tags: ['Astro', 'TailwindCSS', 'React']
+    title: 'Atlasmooth portfolio page',
+    description: 'Real work done for a client in fiverr.',
+    image: 'work-5.png',
+    link: 'https://andres-fiverr.vercel.app/',
+    tags: ['astro', 'tailwind', 'react']
   },
   {
     title: 'International Psychology & Environmental Congress',
     description: 'Real work done for the annual event of a congress.',
     image: '/work-1.png',
     link: 'https://congresopga.unicoc.edu.co/',
-    tags: ['WordPress']
+    tags: ['wordpress']
   },
   {
     title: 'Frontend Mentor Landing Page',
     description: 'Landing page for a frontend mentor challenge.',
     image: '/work-2.png',
     link: 'https://loopstudios-landing-page-pearl-rho.vercel.app/',
-    tags: ['Astro', 'TailwindCSS']
+    tags: ['astro', 'tailwind']
   },
   {
     title: 'Frontend Mentor Landing Page',
     description: 'Landing page for a frontend mentor challenge.',
     image: '/work-4.png',
     link: 'https://easybank-landing-page-one-lemon.vercel.app/',
-    tags: ['Astro', 'TailwindCSS']
+    tags: ['astro', 'tailwind']
   }
 ]
 ---
 
-<div class="projects-wrapper">
+<section class="md:hidden grid gap-2">
+  {
+    projects.map((project) => {
+      console.log(project)
+      return (
+        <div class="">
+          <div class="border rounded-lg shadow bg-primary-950/50 border-gray-700">
+            <img class="rounded-t-lg " src={project.image} alt="" />
+            <div class="p-5">
+              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{project.title}</h5>
+              <p class="mb-3 font-normal text-base text-gray-700 dark:text-gray-400">{project.description}</p>
+              <div class="flex">
+                <div class="inline-flex justify-between min-w-full ">
+                  <a href={project.link} target="_blank" class="transition-colors duration-500 inline-flex items-center px-3 py-2 text-xs md:text-sm font-medium text-center text-primary-50 bg-primary-600 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 ">
+                    Visit Site
+                    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                    </svg>
+                  </a>
+                  <div class="flex gap-2 items-center">
+                    {project.tags.map((tag) => {
+                      const astro = tag === 'astro'
+                      const tailwind = tag === 'tailwind'
+                      const react = tag === 'react'
+                      const wordpress = tag === 'wordpress'
+                      return <TechTags astro={astro} tailwind={tailwind} react={react} wordpress={wordpress} />
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    })
+  }
+</section>
+
+<div class="projects-wrapper md:block hidden">
   <div class="projects || flex gap-6 min-w-fit">
     {
       projects.map((project) => (
@@ -52,15 +91,13 @@ const projects = [
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
                   </svg>
                 </a>
-                <div class="flex gap-2">
+                <div class="flex gap-4">
                   {project.tags.map((tag) => {
-                    if (tag === 'Astro') {
-                      return <AstroBadge>{tag}</AstroBadge>
-                    } else if (tag === 'TailwindCSS') {
-                      return <TwBadge>{tag}</TwBadge>
-                    }
-
-                    return <WpBadge>{tag}</WpBadge>
+                    const astro = tag === 'astro'
+                    const tailwind = tag === 'tailwind'
+                    const react = tag === 'react'
+                    const wordpress = tag === 'wordpress'
+                    return <TechTags astro={astro} tailwind={tailwind} react={react} wordpress={wordpress} />
                   })}
                 </div>
               </div>

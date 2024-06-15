@@ -1,0 +1,30 @@
+---
+interface Props {
+  astro: boolean
+  tailwind: boolean
+  react: boolean
+  wordpress: boolean
+}
+
+const Images = {
+  astro: '/logos/astro.png',
+  tailwind: '/logos/tailwind.png',
+  react: '/logos/react.png',
+  wordpress: '/logos/wordpress.png'
+}
+
+const { astro, tailwind, react, wordpress } = Astro.props
+let img = ''
+
+if (astro) {
+  img = Images.astro
+} else if (tailwind) {
+  img = Images.tailwind
+} else if (react) {
+  img = Images.react
+} else if (wordpress) {
+  img = Images.wordpress
+}
+---
+
+<img src={img} alt="Astro" class="h-6 md:h-10 size-full object-contain" />
